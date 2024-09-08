@@ -28,6 +28,6 @@ jobs:
       
 
       - name: Check Commit message
-        uses: wagoid/commitlint-github-action@v3
+        uses: wagoid/commitlint-github-action@v6
         with:
           configFile: commitlint.config.ts
