@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 259 58% 95%;
+    --foreground: 259 5% 0%;
+    --card: 259 50% 90%;
+    --card-foreground: 259 5% 10%;
+    --popover: 259 58% 95%;
+    --popover-foreground: 259 95% 0%;
+    --primary: 259 100% 68.4%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 259 30% 70%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 221 30% 85%;
+    --muted-foreground: 259 5% 35%;
+    --accent: 221 30% 80%;
+    --accent-foreground: 259 5% 10%;
+    --destructive: 0 58% 30%;
+    --destructive-foreground: 259 5% 90%;
+    --border: 259 30% 50%;
+    --input: 259 30% 18%;
+    --ring: 259 100% 68.4%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 229, 63%, 5%;
+    --foreground: 259 5% 90%;
+    --card: 249, 50%, 13%;
+    --card-foreground: 259 5% 90%;
+    --popover: 259 50% 5%;
+    --popover-foreground: 259 5% 90%;
+    --primary: 259 100% 68.4%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 259 30% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 221 30% 15%;
+    --muted-foreground: 248, 19%, 71%;
+    --accent: 221 30% 15%;
+    --accent-foreground: 259 5% 90%;
+    --critical: 0 58% 30%;
+    --critical-foreground: 259 5% 90%;
+    --border: 259 30% 18%;
+    --input: 259 30% 18%;
+    --ring: 259 100% 68.4%;
+    --radius: 0.5rem;
+
+    --positive: 120 83% 58%;
+    --positive-foreground: 120 85% 8%;
+    --caution: 60 83% 58%;
+    --caution-foreground: 60 85% 8%;
+    --info: 200 70% 50%;
+    --info-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .padding-x {
+    @apply px-6 sm:px-16;
+  }
+
+  .padding-y {
+    @apply py-6 sm:py-16;
+  }
+
+  .padding {
+    @apply px-6 py-10 sm:px-16 sm:py-16;
+  }
+
+  .section-heading {
+    @apply text-3xl font-bold md:text-4xl lg:text-5xl;
+  }
+
+  .section-subtext {
+    @apply uppercase tracking-wider text-muted-foreground md:text-lg;
+  }
+}
+
+@layer utilities {
+  .text-pretty {
+    text-wrap: balance;
+    text-wrap: pretty;
+  }
+}
+
+.violet-gradient {
+  background: #804dee;
+  background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
+  background: -webkit-linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
+}
+
+.blue-text-gradient {
+  /* background: -webkit-linear-gradient(#eee, #333); */
+  background: #56ccf2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #2f80ed,
+    #56ccf2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #2f80ed,
+    #56ccf2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
