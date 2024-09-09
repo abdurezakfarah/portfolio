@@ -29,10 +29,16 @@ export function Navbar({ items }: NavbarProps) {
       <NavigationMenu className="rounded-3xl px-4 max-md:hidden md:bg-black-100">
         <NavigationMenuList>
           {items.map((item) => (
-            <NavigationMenuItem key={item.label} className="bg-black-100">
+            <NavigationMenuItem
+              key={item.label}
+              className="bg-black-100 md:hover:bg-[#291b47]"
+            >
               <Link href={item.href} legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={cn(navigationMenuTriggerStyle(), 'bg-black-100')}
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    'bg-black-100 md:hover:bg-[#291b47]',
+                  )}
                 >
                   {item.label}
                 </NavigationMenuLink>

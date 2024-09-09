@@ -46,6 +46,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
       iconStyle={{
         background: experience.icon?.background?.value ?? '#333347',
       }}
+      dateClassName="text-[#f9f7fd]"
       icon={
         experience.icon ? (
           <Icon

@@ -131,7 +131,7 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
               <span aria-hidden>&#x2022;</span>
               <span>{readingTime(post.plainText).text}</span>
             </div>
-            <h1 className="mt-2 inline-block text-pretty text-4xl font-bold leading-[1.1] text-[#f9f7fd] lg:text-5xl">
+            <h1 className="mt-2 inline-block text-pretty font-heading text-4xl font-bold leading-[1.1] text-[#f9f7fd] lg:text-5xl">
               {post.title}
             </h1>
             <Link

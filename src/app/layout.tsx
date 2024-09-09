@@ -1,4 +1,3 @@
-import { Header } from '@/components/header';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { siteConfig } from '@/configuration/site';
@@ -8,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import NextTopLoader from 'nextjs-toploader';
+import { fontHeading } from './fonts/cal-sans';
 import { firaCode } from './fonts/fira-code';
 import { inter } from './fonts/inter';
 
@@ -150,6 +150,7 @@ export default function RootLayout({
         className={cn(
           'relative min-h-screen font-sans',
           inter.variable,
+          fontHeading.variable,
           firaCode.variable,
         )}
       >
@@ -169,7 +170,6 @@ export default function RootLayout({
           showAtBottom={false}
         />
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-          <Header />
           {children}
         </ThemeProvider>
         <Analytics />

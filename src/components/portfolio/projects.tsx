@@ -2,7 +2,6 @@ import { type Projects } from '@/types/sanity';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BiLinkExternal, BiLogoGithub } from 'react-icons/bi';
-import stc from 'string-to-color';
 import { Heading } from '../heading';
 
 interface ProjectsProps {
@@ -41,16 +40,16 @@ function Project({ project }: ProjectCardProps) {
           sizes="100%"
           className="absolute size-full rounded-2xl object-cover"
         />
-        <div className="relative mx-auto flex w-fit min-w-28 items-center justify-center gap-3 rounded-3xl bg-black px-3 py-1">
+        <div className="relative mx-auto flex w-fit min-w-28 items-center justify-center gap-x-4 rounded-3xl bg-black px-6 py-3">
           {source && (
             <Link href={source} title="Github Repo">
-              <BiLogoGithub className="size-6" />
-              <span className="sr-only">See source code</span>
+              <BiLogoGithub className="size-6 text-muted-foreground hover:text-white" />
+              <span className="sr-only">See the source code</span>
             </Link>
           )}
           {preview && (
             <Link href={preview} title="Preview">
-              <BiLinkExternal className="size-6" />
+              <BiLinkExternal className="size-6 text-muted-foreground hover:text-white" />
               <span className="sr-only">See it in live</span>
             </Link>
           )}
@@ -59,13 +58,13 @@ function Project({ project }: ProjectCardProps) {
 
       <div className="mt-5">
         <h3 className="text-[24px] font-bold text-white">{title}</h3>
-        <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+        <p className="mt-2 text-muted-foreground">{description}</p>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
         {tech.map((t) => (
-          <p key={`${title}-${t}`} className="text-sm" style={{ color: stc(t) }}>
-            #{t}
+          <p key={`${title}-${t}`} className="text-sm text-muted-foreground">
+            &#x2022; {t}
           </p>
         ))}
       </div>

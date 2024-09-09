@@ -9,8 +9,8 @@
     "commit": "git-cz",
     "lint": "eslint src --ext ts,js,tsx,jsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,js,tsx,jsx --fix",
-    "format": "prettier --check 'src/**/*.{ts,tsx,js,jsx,css,html}'",
-    "format:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,html}'",
+    "format": "prettier --check 'src/**/*.{ts,tsx,js,jsx,css}'",
+   "format:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css}' 'src/app/\\(routes\\)/**/*.ts' 'src/app/layout.tsx' 'src/components/**/*.ts'",
     "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate",
     "prepare": "husky"
   },
@@ -91,13 +91,13 @@
     "pre-push": "bun run format:fix && bun run lint:fix && bun run lint"
   },
   "lint-staged": {
+    "src/**/*.css": [
+      "bun run format:fix"
+    ],
     "src/**/*.{ts,tsx,js,jsx}": [
       "bun run format:fix",
       "bun run lint:fix",
       "bun run lint"
-    ],
-    "src/**/*.css": [
-      "bun run format:fix"
     ]
   },
   "config": {

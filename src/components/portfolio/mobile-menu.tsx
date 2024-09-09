@@ -17,7 +17,7 @@ export function MobileMenu({ items, handleClose }: MobileMenuProps) {
       onClick={handleClose}
       className="container absolute inset-0 top-14 z-40 h-[calc(100vh-2.5rem)] bg-black/50 animate-in slide-in-from-top-1"
     >
-      <div className="-mx-8 w-[calc(100%+4rem)] bg-background p-8 shadow-lg">
+      <div className="-mx-8 w-[calc(100%+4rem)] bg-background px-8 py-10 shadow-lg">
         <nav className="grid grid-flow-row auto-rows-max space-y-2">
           {items.map((item, index) => (
             <Link

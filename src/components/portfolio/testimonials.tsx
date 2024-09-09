@@ -13,7 +13,7 @@ export function Testimonials({ testimonials: testimonialsBlock }: TestimonialsPr
       <div className="padding -mx-8 min-h-[300px] w-[100%+2rem] bg-tertiary">
         <Heading heading={heading} />
       </div>
-      <div className="-mt-32 grid gap-7 pb-14 sm:grid-cols-2 md:-mt-24 md:grid-cols-3">
+      <div className="-mt-36 grid gap-7 pb-14 sm:grid-cols-2 md:-mt-24 md:grid-cols-3">
         {testimonials.map((testimonial) => (
           <Testimonial key={testimonial._id} testimonial={testimonial} />
         ))}

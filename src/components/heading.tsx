@@ -14,7 +14,7 @@ export function Heading({ heading }: HeadingProps) {
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 text-pretty text-lg font-medium text-muted-foreground sm:text-xl">
+        <p className="mt-4 max-w-3xl text-pretty text-lg font-medium text-muted-foreground sm:text-xl">
           {subtitle}
         </p>
       )}

@@ -20,7 +20,7 @@ export function TextSection({ textSection }: TextSectionProps) {
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="max-w-3xl text-pretty text-lg leading-7 text-muted-foreground md:text-xl [&:not(:first-child)]:mt-6">
+      <p className="mt-4 max-w-3xl text-lg text-muted-foreground md:text-xl">
         {children}
       </p>
     ),

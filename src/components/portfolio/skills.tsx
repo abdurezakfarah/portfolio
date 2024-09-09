@@ -15,7 +15,7 @@ export function Skills({ skills: skillsSection }: SkillsProps) {
       <div className="mt-10 flex flex-col flex-wrap justify-evenly gap-x-28 gap-y-12 md:mt-12 md:flex-row md:gap-y-14">
         {skills?.map((categories) => (
           <div key={categories?.title} className="mb-3 flex flex-col gap-5">
-            <h3 className="w-full text-left text-xl font-medium capitalize tracking-tight">
+            <h3 className="w-full text-left text-xl font-medium capitalize">
               {categories?.title}
             </h3>
             <div className="flex w-fit flex-wrap items-center gap-4">
@@ -23,9 +23,9 @@ export function Skills({ skills: skillsSection }: SkillsProps) {
                 <div
                   id={tech?.name}
                   key={tech?.name}
-                  className="flex flex-col items-center gap-x-2.5 gap-y-2"
+                  className="flex flex-col items-center gap-y-2"
                 >
-                  <div className="relative flex size-10 items-center justify-center rounded-full bg-white md:size-16">
+                  <div className="relative flex size-16 items-center justify-center rounded-full bg-white">
                     {tech.icon && (
                       <Image
                         src={tech.icon}
@@ -36,7 +36,7 @@ export function Skills({ skills: skillsSection }: SkillsProps) {
                       />
                     )}
                   </div>
-                  <span className="font-semilight text-sm tracking-tight text-gray-200 md:text-base">
+                  <span className="text-sm font-light tracking-tight md:text-base">
                     {tech.name}
                   </span>
                 </div>

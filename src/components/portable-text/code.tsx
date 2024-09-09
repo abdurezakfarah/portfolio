@@ -42,7 +42,7 @@ export default function Code({ value }: CodeProps) {
   if (!code) return;
 
   return (
-    <div className="my-4 rounded-lg font-fira-code">
+    <div className="my-4 rounded-lg font-fira">
       {(code.filename || showCopy) && (
         <div className="flex h-10 items-center justify-between rounded-t-lg bg-black-100 px-4 py-1">
           {code.filename && <span className="font-mono text-sm">{code.filename}</span>}
