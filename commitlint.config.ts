@@ -19,97 +19,83 @@ const Configuration: UserConfig = {
         'ci', // Changes to CI configuration files and scripts
         'chore', // Other changes that don't modify src or test files
         'revert', // Reverts a previous commit
+        'remove',
       ],
     ],
-    'scope-enum': [
-      2,
-      'always',
-      [
-        'setup', // Project setup
-        'config', // Configuration files
-        'deps', // Dependency updates
-        'feature', // Feature-specific changes
-        'bug', // Bug fixes
-        'docs', // Documentation
-        'style', // Code style/formatting
-        'refactor', // Code refactoring
-        'test', // Tests
-        'build', // Build scripts or configuration
-        'ci', // Continuous integration
-        'release', // Release related changes
-        'other', // Other changes
-      ],
-    ],
-    'body-full-stop': [2, 'always', '.'],
-    'body-max-length': [2, 'always', 150],
   },
   prompt: {
     messages: {
-      skip: 'Skipping this one!',
-      max: 'Keep it under %d characters, please!',
-      min: 'At least %d characters needed!',
-      emptyWarning: 'Oops, you forgot to fill this in!',
-      upperLimitWarning: 'Whoa, that’s too long!',
-      lowerLimitWarning: 'Hmm, that’s too short!',
+      skip: ':skip',
+      max: 'upper %d chars',
+      min: '%d chars at least',
+      emptyWarning: 'can not be empty',
+      upperLimitWarning: 'over limit',
+      lowerLimitWarning: 'below limit',
     },
     questions: {
       type: {
         description: 'What kind of change are you committing?',
         enum: {
           feat: {
-            description: 'Adding something cool and new!',
+            description: 'Introducing a new feature or functionality.',
             title: 'Features',
-            emoji: '✨', 
+            emoji: '✨',
           },
           fix: {
-            description: 'Squashing a bug',
+            description: 'Fixing a bug or issue in the code.',
             title: 'Bug Fixes',
-            emoji: '🐛', 
+            emoji: '🐛',
           },
           docs: {
-            description: 'Updating the docs',
+            description: 'Updating or adding documentation.',
             title: 'Documentation',
-            emoji: '📚', 
+            emoji: '📚',
           },
           style: {
-            description: 'Tweaking styles (no code changes)',
+            description:
+              'Changes that do not affect functionality (e.g., formatting, white-space).',
             title: 'Styles',
-            emoji: '🎨', 
+            emoji: '🎨',
           },
           refactor: {
-            description: 'Cleaning up the code without changing functionality',
+            description: 'Restructuring the code without changing its behavior.',
             title: 'Code Refactoring',
-            emoji: '♻️', 
+            emoji: '♻️',
           },
           perf: {
-            description: 'Making things faster',
+            description: 'Improving the performance of the code.',
             title: 'Performance Improvements',
-            emoji: '⚡️', 
+            emoji: '⚡️',
           },
           test: {
-            description: 'Writing or fixing tests',
+            description: 'Adding or modifying tests.',
             title: 'Tests',
-            emoji: '✅', 
+            emoji: '✅',
           },
           build: {
-            description: 'Changing the build setup',
+            description: 'Modifying the build configuration or tools.',
             title: 'Builds',
-            emoji: '🔧', 
+            emoji: '🔧',
           },
           ci: {
-            description: 'Updating CI config',
-            title: 'Continuous Integrations',
-            emoji: '👷', 
+            description: 'Updating CI configuration files and scripts.',
+            title: 'Continuous Integration',
+            emoji: '👷',
           },
           chore: {
-            description: 'General maintenance tasks',
+            description: 'Other changes that do not modify source or test files.',
             title: 'Chores',
-            emoji: '🔨', 
+            emoji: '🔨',
           },
           revert: {
-            description: 'Undoing a previous commit',
+            description: 'Reverting a previous commit.',
             title: 'Reverts',
-            emoji: '⏪', 
+            emoji: '⏪',
+          },
+          remove: {
+            description: 'Removing code or files.',
+            title: 'Remove',
+            emoji: '🔥',
           },
         },
       },
