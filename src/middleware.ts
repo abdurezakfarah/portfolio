@@ -1,7 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-import crypto from 'crypto';
-
 export async function middleware(request: NextRequest) {
   return csp(request);
 }
@@ -40,7 +38,7 @@ function csp(request: NextRequest) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`;
+  `;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader.replace(/\s{2,}/g, ' ').trim();
 
