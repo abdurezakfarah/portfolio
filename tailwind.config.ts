@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 const config = {
   darkMode: ['class'],
@@ -71,7 +72,9 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        'fira-code': ['var(--font-fira-code)', 'monospace'],
+        'fira': ['var(--font-fira-code)', 'monospace'],
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+        heading: ['var(--font-heading)', ...fontFamily.sans],
       },
       keyframes: {
         'accordion-down': {
