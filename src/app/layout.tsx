@@ -8,8 +8,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import NextTopLoader from 'nextjs-toploader';
-import { arimo } from './fonts/arimo';
 import { firaCode } from './fonts/fira-code';
+import { inter } from './fonts/inter';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -149,7 +149,7 @@ export default function RootLayout({
       <body
         className={cn(
           'relative min-h-screen font-sans',
-          arimo.variable,
+          inter.variable,
           firaCode.variable,
         )}
       >
