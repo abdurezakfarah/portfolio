@@ -1,7 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-import crypto from 'crypto';
-
 export async function middleware(request: NextRequest) {
   return csp(request);
 }
