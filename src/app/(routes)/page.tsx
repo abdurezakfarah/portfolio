@@ -16,8 +16,6 @@ export const metadata = {
 // Ensure this is statically generated
 export const dynamic = 'force-static';
 
-export const revalidate = 1440;
-
 export default async function Home() {
   const pageData = await client.fetch<PageQueryResult>(pageQuery, { slug: 'home' });
 
