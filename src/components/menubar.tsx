@@ -1,12 +1,19 @@
 'use client';
 import { siteConfig } from '@/configuration/site';
 import { NavItem } from '@/types';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { BiLogoGithub } from 'react-icons/bi';
 import { MdClose, MdMenu, MdOutlineMail } from 'react-icons/md';
-import { MobileMenu } from './portfolio/mobile-menu';
 import { Button } from './shadcn/button';
 import { SocialLink } from './social-link';
+
+const DynamicMobile = dynamic(
+  () => import('./portfolio/mobile-menu').then((mod) => mod.MobileMenu),
+  {
+    ssr: false,
+  },
+);
 
 type MenubarProps = {
   items: NavItem[];
@@ -42,7 +49,7 @@ export function Menubar({ items }: MenubarProps) {
         )}
       </Button>
       {isMobileMenuOpen && (
-        <MobileMenu items={items} handleClose={() => setIsMobileMenuOpen(false)} />
+        <DynamicMobile items={items} handleClose={() => setIsMobileMenuOpen(false)} />
       )}
     </div>
   );
