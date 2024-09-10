@@ -10,7 +10,7 @@
     "lint": "eslint src --ext ts,js,tsx,jsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,js,tsx,jsx --fix",
     "format": "prettier --check 'src/**/*.{ts,tsx,js,jsx,css}'",
-   "format:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css}' 'src/app/\\(routes\\)/**/*.ts' 'src/app/layout.tsx' 'src/components/**/*.ts'",
+    "format:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css}' 'src/app/\\(routes\\)/**/*.ts' 'src/app/layout.tsx' 'src/components/**/*.ts'",
     "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate",
     "prepare": "husky"
   },
@@ -30,7 +30,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
-    "framer-motion": "^11.5.4",
     "lucide-react": "^0.436.0",
     "next": "14.2.7",
     "next-sanity": "^9.4.7",

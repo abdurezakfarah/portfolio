@@ -1,5 +1,3 @@
-'use client';
-
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -7,10 +5,8 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/shadcn/navigation-menu';
-import { useScrollDown } from '@/hooks/use-scroll-down';
 import { cn } from '@/lib/utilities/cn';
 import { NavItem } from '@/types';
-import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
 type NavbarProps = {
@@ -18,26 +14,20 @@ type NavbarProps = {
 };
 
 export function Navbar({ items }: NavbarProps) {
-  const isScrollDown = useScrollDown();
   return (
-    <motion.div
-      variants={MENU_VARIANTS}
-      animate={isScrollDown ? 'hidden' : 'visible'}
-      transition={{ ease: 'easeInOut' }}
-      className="relative"
-    >
+    <div className="relative">
       <NavigationMenu className="rounded-3xl px-4 max-md:hidden md:bg-black-100">
         <NavigationMenuList>
           {items.map((item) => (
             <NavigationMenuItem
               key={item.label}
-              className="bg-black-100 md:hover:bg-[#291b47]"
+              className="rounded-3xl bg-black-100 md:hover:bg-[#291b47]"
             >
               <Link href={item.href} legacyBehavior passHref>
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    'bg-black-100 md:hover:bg-[#291b47]',
+                    'rounded-3xl bg-black-100 hover:text-white md:hover:bg-[#291b47]',
                   )}
                 >
                   {item.label}
@@ -47,17 +37,6 @@ export function Navbar({ items }: NavbarProps) {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-    </motion.div>
+    </div>
   );
 }
-
-const MENU_VARIANTS: Variants = {
-  hidden: {
-    y: '-120%',
-    opacity: 0,
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
