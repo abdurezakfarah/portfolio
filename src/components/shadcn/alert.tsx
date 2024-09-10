@@ -25,7 +25,7 @@ const Alert = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
 >(({ className, variant, ...props }, ref) => (
-  <aside
+  <div
     ref={ref}
     role="alert"
     className={cn(alertVariants({ variant }), className)}

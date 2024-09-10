@@ -47,7 +47,7 @@ export default function Code({ value }: CodeProps) {
         <div className="flex h-10 items-center justify-between rounded-t-lg bg-black-100 px-4 py-1">
           {code.filename && <span className="font-mono text-sm">{code.filename}</span>}
           {showCopy && (
-            <div className='ml-auto'>
+            <div className="ml-auto">
               {isCopied ? (
                 <div className="flex items-center gap-1.5 text-xs">
                   <MdOutlineDoneAll className="size-4" />
@@ -61,6 +61,7 @@ export default function Code({ value }: CodeProps) {
                   className="hover:bg-transparent"
                 >
                   <MdOutlineContentCopy className="size-4" />
+                  <span className="sr-only">Copy code</span>
                 </Button>
               )}
             </div>
