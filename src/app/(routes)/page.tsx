@@ -4,7 +4,14 @@ import { SanityContent } from '@/components/sanity-content';
 import { client } from '@/sanity/lib/client';
 import { pageQuery } from '@/sanity/lib/queries';
 import { PageQueryResult } from '@/sanity/sanity.types';
+import { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata = {
+  title: {
+    absolute: 'Abdurezak Farah',
+  },
+} satisfies Metadata;
 
 export default async function Home() {
   const pageData = await client.fetch<PageQueryResult>(pageQuery, { slug: 'home' });
