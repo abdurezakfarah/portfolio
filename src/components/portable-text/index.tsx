@@ -11,8 +11,6 @@ import Link from 'next/link';
 import { Callout } from './callout';
 import Code from './code';
 
-// import { Callout } from './callout';
-
 interface PortableTextProps extends PortableTextPropsType {
   components?: PortableTextComponents;
   overwriteComponents?: boolean;
@@ -54,20 +52,27 @@ const portableTextDefaultComponents: PortableTextComponents = {
     },
   },
   marks: {
+    strong: ({ children, value }) => {
+      return <strong className="font-bold text-[#e2d6ff]">{children}</strong>;
+    },
     link: ({ children, value }) => {
-      const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
+      const external = !(value.href.startsWith('/') || value.href.startsWith('#'))
+        ? 'noreferrer noopener'
+        : undefined;
+
       return (
         <Link
           href={value.href}
-          rel={rel}
-          className="font-medium underline underline-offset-4"
+          rel={external}
+          target={!!external ? '_blank' : undefined}
+          className="font-medium text-[#f5f1ff] underline underline-offset-4"
         >
           {children}
         </Link>
       );
     },
     code: ({ children }) => (
-      <code className="relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm">
+      <code className="relative rounded border bg-[rgb(11,9,23)] px-[0.3rem] py-[0.2rem] font-mono text-sm">
         {children}
       </code>
     ),
@@ -76,12 +81,16 @@ const portableTextDefaultComponents: PortableTextComponents = {
     ),
   },
   list: {
-    bullet: ({ children }) => <ul className="my-6 ml-6 list-disc">{children}</ul>,
-    number: ({ children }) => <ol className="my-6 ml-6 list-decimal">{children}</ol>,
+    bullet: ({ children }) => (
+      <ul className="my-6 ml-6 list-disc text-[#efe9ff]">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="my-6 ml-6 list-decimal text-[#efe9ff]">{children}</ol>
+    ),
   },
   listItem: {
-    bullet: ({ children }) => <li className="mt-2">{children}</li>,
-    number: ({ children }) => <li className="mt-2">{children}</li>,
+    bullet: ({ children }) => <li className="mt-2 text-[#efe9ff]">{children}</li>,
+    number: ({ children }) => <li className="mt-2 text-[#efe9ff]">{children}</li>,
   },
   block: {
     normal: ({ children }) => (

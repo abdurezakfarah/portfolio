@@ -13,7 +13,7 @@ type PostProps = {
 
 export function Post({ post, index }: PostProps) {
   return (
-    <article key={post._id} className="group relative flex flex-col space-y-2">
+    <article key={post._id} className="group relative flex flex-col">
       {post.image && (
         <Image
           src={post.image}
@@ -24,9 +24,9 @@ export function Post({ post, index }: PostProps) {
           priority={index <= 1}
         />
       )}
-      <h2 className="text-lg font-semibold">{post.title}</h2>
+      <h2 className="mt-4 text-lg font-semibold">{post.title}</h2>
       {/* <p className="line-clamp-3 text-muted-foreground text-pretty">{post.excerpt}</p> */}
-      <div className="flex gap-2 text-sm text-muted-foreground">
+      <div className="mt-2 flex gap-3 text-sm text-muted-foreground">
         <time dateTime={format(post.publishedAt, 'yyyy-mm-dd')}>
           {format(post.publishedAt, 'PPP')}
         </time>

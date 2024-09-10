@@ -20,11 +20,11 @@ interface CalloutProps {
 
 export function Callout({ value }: CalloutProps) {
   const { theme, title, text } = value;
-  const Icon = theme ? icons[theme] : null;
+  const Icon = icons[theme];
   return (
     <Alert variant={theme} className="my-6">
-      {Icon && <Icon className="size-5" />}
-      {title && <AlertTitle className="mb-4 font-bold">{title}</AlertTitle>}
+      <Icon className="size-4" />
+      {title && <AlertTitle>{title}</AlertTitle>}
       <AlertDescription>
         <PortableText value={text} components={portableTextComponents} />
       </AlertDescription>
@@ -61,8 +61,6 @@ const portableTextComponents: PortableTextComponents = {
     number: ({ children }) => <li className="mt-1 text-sm">{children}</li>,
   },
   block: {
-    normal: ({ children }) => (
-      <p className="text-sm [&:not(:first-child)]:mt-2">{children}</p>
-    ),
+    normal: ({ children }) => <p className="text-sm [&_p]:leading-relaxed">{children}</p>,
   },
 };

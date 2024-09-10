@@ -46,23 +46,25 @@ export default function Code({ value }: CodeProps) {
       {(code.filename || showCopy) && (
         <div className="flex h-10 items-center justify-between rounded-t-lg bg-black-100 px-4 py-1">
           {code.filename && <span className="font-mono text-sm">{code.filename}</span>}
-          {showCopy ? (
-            isCopied ? (
-              <div className="flex items-center gap-1.5 text-xs">
-                <MdOutlineDoneAll className="size-4" />
-                Copied
-              </div>
-            ) : (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => handleCopy(code.code!)}
-                className="hover:bg-transparent"
-              >
-                <MdOutlineContentCopy className="size-4" />
-              </Button>
-            )
-          ) : null}
+          {showCopy && (
+            <div className='ml-auto'>
+              {isCopied ? (
+                <div className="flex items-center gap-1.5 text-xs">
+                  <MdOutlineDoneAll className="size-4" />
+                  Copied
+                </div>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleCopy(code.code!)}
+                  className="hover:bg-transparent"
+                >
+                  <MdOutlineContentCopy className="size-4" />
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       )}
 
