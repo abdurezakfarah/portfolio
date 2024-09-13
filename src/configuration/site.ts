@@ -9,5 +9,5 @@ export const siteConfig: SiteConfig = {
   url: publicUrl,
   github: 'https://www.github.com/abdurezakfarah',
   twitter: 'https//www.x.com/abdurezakfarah',
-  email: 'mailto:mail@abdurezak.com',
+  email: 'mailto:abdurazak.awil1@gmail.com',
 };
