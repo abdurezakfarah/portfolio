@@ -12,7 +12,7 @@ export function Skills({ skills: skillsSection }: SkillsProps) {
     <section className="container py-16 md:px-16">
       <Heading heading={heading} />
 
-      <div className="mt-10 flex flex-col flex-wrap justify-evenly gap-x-28 gap-y-12 md:mt-12 md:flex-row md:gap-y-14">
+      <div className="mt-10 flex flex-col flex-wrap gap-x-28 gap-y-12 md:mt-12 md:flex-row md:gap-y-14">
         {skills?.map((categories) => (
           <div key={categories?.title} className="mb-3 flex flex-col gap-5">
             <h3 className="w-full text-left text-xl font-medium capitalize">
