@@ -10,7 +10,7 @@
     "lint": "eslint src --ext ts,js,tsx,jsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,js,tsx,jsx --fix",
     "format": "prettier --check 'src/**/*.{ts,tsx,js,jsx,css}'",
-    "format:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css}' 'src/app/\\(routes\\)/**/*.ts' 'src/app/layout.tsx' 'src/components/**/*.ts'",
+    "format:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css}'",
     "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate",
     "prepare": "husky"
   },
