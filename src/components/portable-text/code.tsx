@@ -7,7 +7,6 @@ import { MdOutlineContentCopy, MdOutlineDoneAll } from 'react-icons/md';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-
 const customOneDark = {
   ...oneDark,
   'groq-operator': { color: '#FF79C6' }, // example: operators like "==", "<=", etc.
@@ -15,7 +14,6 @@ const customOneDark = {
   'groq-function': { color: '#50FA7B' }, // example: functions like "count()", "sum()"
   'groq-string': { color: '#F1FA8C' }, // strings
 };
-
 
 type CodeProps = {
   value: CustomCode;

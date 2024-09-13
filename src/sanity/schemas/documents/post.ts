@@ -79,9 +79,8 @@ export const post = defineType({
       title: 'Show Opengraph in the post',
       description: 'Show Opengraph image after the post heading.',
       initialValue: false,
-      group: "media"
+      group: 'media',
     }),
-
     defineField({
       name: 'tags',
       title: 'Tags',
