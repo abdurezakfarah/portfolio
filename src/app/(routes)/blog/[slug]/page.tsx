@@ -14,7 +14,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MdChevronLeft } from 'react-icons/md';
-import readingTime from 'reading-time';
 import type { BlogPosting, WithContext } from 'schema-dts';
 
 interface PostPageProps {
@@ -132,16 +131,11 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
       <div className="gap-4 pt-6 lg:flex lg:pt-10">
         <article id="post-body" className="mx-auto max-w-2xl">
           <div>
-            <div className="flex gap-2 text-muted-foreground">
-              <div>
-                <span> Published on </span>
-                <time dateTime={format(post.publishedAt, 'yyyy-mm-dd')}>
-                  {format(post.publishedAt, 'PPP')}
-                </time>
-              </div>
-
-              <span aria-hidden>&#x2022;</span>
-              <span>{readingTime(post.plainText).text}</span>
+            <div className="text-muted-foreground">
+              <span> Published on </span>
+              <time dateTime={format(post.publishedAt, 'yyyy-mm-dd')}>
+                {format(post.publishedAt, 'PPP')}
+              </time>
             </div>
             <h1 className="mt-2 inline-block text-pretty font-heading text-4xl font-bold leading-[1.1] text-[#f9f7fd] lg:text-5xl">
               {post.title}

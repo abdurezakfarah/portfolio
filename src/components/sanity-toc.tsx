@@ -11,6 +11,7 @@ import { cn } from '@/lib/utilities/cn';
 import { slugify } from '@/lib/utilities/slugify';
 import { PostPageQueryResult } from '@/sanity/sanity.types';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 // Define the type for the Table of Contents (ToC)
 type Headings = NonNullable<PostPageQueryResult>['headings'];
@@ -136,13 +137,27 @@ export function RenderToc({
 
 export function Toc({ headings, title }: { headings: Headings; title?: string }) {
   const isLg = useLg();
+  const [accordionValue, setAccordionValue] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (isLg) {
+      setAccordionValue('toc-content');
+    } else {
+      setAccordionValue(undefined);
+    }
+  }, [isLg]);
+
+  const handleAccordionChange = (value: string | undefined) => {
+    setAccordionValue((prev) => (prev === value ? undefined : value));
+  };
   return (
     <section className="flex max-w-sm flex-col max-lg:my-10">
       <Accordion
         type="single"
         collapsible
         className="w-full bg-black-100"
-        value={isLg ? 'toc-content' : undefined}
+        value={accordionValue}
+        onValueChange={handleAccordionChange}
       >
         <AccordionItem value="toc-content" className="border-none">
           <AccordionTrigger className="rounded-lg border px-4 hover:no-underline">
