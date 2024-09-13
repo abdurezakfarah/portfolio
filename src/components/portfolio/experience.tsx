@@ -8,6 +8,7 @@ import {
 } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
+import { MdWork } from 'react-icons/md';
 import { Heading } from '../heading';
 
 interface ExperienceProps {
@@ -34,6 +35,8 @@ type ExperienceCardProps = {
   experience: Experience['experience'][number];
 };
 
+//TODO: fix so icon color / text color applies
+
 const ExperienceCard = ({ experience }: ExperienceCardProps) => {
   return (
     <VerticalTimelineElement
@@ -45,6 +48,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
       date={experience.date}
       iconStyle={{
         background: experience.icon?.background?.value ?? '#333347',
+        color: experience.icon?.foreground?.value ?? 'white',
       }}
       dateClassName="text-[#f9f7fd]"
       icon={
@@ -52,15 +56,18 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
           <Icon
             icon={experience.icon.icon.name!}
             style={{
-              color: experience.icon?.foreground?.value,
+              color: experience.icon?.foreground?.value ?? 'white',
               background: experience.icon.background?.value ?? '#333347',
               width: 35,
               height: 35,
               marginLeft: '-17px',
               marginTop: '-17px',
+              borderRadius: '50%',
             }}
           />
-        ) : undefined
+        ) : (
+          <MdWork />
+        )
       }
     >
       <div>
