@@ -49,6 +49,7 @@ export const postPageQuery = groq`
     title,
     "slug": slug.current,
     "ogImage": ogImage.asset->url,
+    showOg,
     publishedAt,
     excerpt,
     body,
@@ -70,7 +71,7 @@ export const postPageQuery = groq`
     "keywords": string::split(keywords, ","),
     _updatedAt,
     
-   "toc": body[length(style) == 2 && string::startsWith(style, "h") && style in ["h2"]],
+   "headings": body[style in ["h2"]],
     
     "relatedPosts": *[
       _type == "post"

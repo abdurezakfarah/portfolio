@@ -1,10 +1,19 @@
+'use client';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/shadcn/accordion';
+import { useLg } from '@/hooks/use-lg';
 import { cn } from '@/lib/utilities/cn';
 import { slugify } from '@/lib/utilities/slugify';
 import { PostPageQueryResult } from '@/sanity/sanity.types';
 import Link from 'next/link';
 
 // Define the type for the Table of Contents (ToC)
-type Toc = NonNullable<PostPageQueryResult>['toc'];
+type Headings = NonNullable<PostPageQueryResult>['headings'];
 
 // Define the type for each node in the tree structure
 type TreeNode = {
@@ -14,7 +23,7 @@ type TreeNode = {
 };
 
 /**
- * Transforms a flat list of blocks into a nested hierarchical tree structure.
+ * Transforms a flat array of blocks into a nested hierarchical tree structure.
  *
  * This function processes a list of heading blocks, organizing them into a tree structure
  * where each node can have multiple children based on their heading levels. The result is
@@ -36,7 +45,7 @@ type TreeNode = {
  * @param blocks - The flat list of heading blocks to transform.
  * @returns - A nested list of tree nodes representing the hierarchical structure.
  */
-export function nestToc(blocks: Toc): TreeNode[] {
+export function nestHeadings(blocks: Headings): TreeNode[] {
   // Array to hold the top-level nodes of the tree
   const treeNodes: TreeNode[] = [];
 
@@ -104,8 +113,8 @@ export function RenderToc({
   return (
     <ul
       className={cn('space-y-2 text-sm font-semibold', {
-        'ml-4 list-disc space-y-1 font-normal text-[#eee8fc]': level > 1,
-        'space-y-3.5 border-l border-[#54486e] pl-4': level === 1,
+        'ml-4 list-disc space-y-1 font-normal': level > 1,
+        'space-y-3.5': level === 1,
       })}
     >
       {elements.map((el) => (
@@ -125,15 +134,27 @@ export function RenderToc({
   );
 }
 
-export function Toc({ elements, title }: { elements: TreeNode[]; title?: string }) {
+export function Toc({ headings, title }: { headings: Headings; title?: string }) {
+  const isLg = useLg();
   return (
-    <section className="flex max-w-sm flex-col">
-      <h2 className="z-0 mb-4 bg-black-100 pb-1.5 pt-6 font-bold md:sticky md:top-0">
-        {title ?? 'Content'}
-      </h2>
-      <nav className="flex gap-4">
-        <RenderToc elements={elements} />
-      </nav>
+    <section className="flex max-w-sm flex-col max-lg:my-10">
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full bg-black-100"
+        value={isLg ? 'toc-content' : undefined}
+      >
+        <AccordionItem value="toc-content" className="border-none">
+          <AccordionTrigger className="rounded-lg border px-4 hover:no-underline">
+            {title ?? 'Content'}
+          </AccordionTrigger>
+          <AccordionContent className="rounded-b-lg px-4 pb-8 pt-4">
+            <nav className="flex gap-4">
+              <RenderToc elements={nestHeadings(headings)} />
+            </nav>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </section>
   );
 }

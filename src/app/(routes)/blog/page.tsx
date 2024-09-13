@@ -7,11 +7,14 @@ export const metadata = {
   title: 'Blog',
 };
 
-// Ensure this is statically generated
 export const dynamic = 'force-static';
 
 export default async function BlogPage() {
-  const posts = await client.fetch<BlogPageQueryResult>(blogPageQuery);
+  const posts = await client.fetch<BlogPageQueryResult>(
+    blogPageQuery,
+    {},
+    { cache: 'no-store' },
+  );
 
   return (
     <div className="container max-w-4xl py-6 lg:py-10">

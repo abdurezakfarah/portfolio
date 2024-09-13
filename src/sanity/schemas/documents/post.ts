@@ -73,6 +73,14 @@ export const post = defineType({
       type: 'image',
       group: 'media',
     }),
+    defineField({
+      type: 'boolean',
+      name: 'showOg',
+      title: 'Show Opengraph in the post',
+      description: 'Show Opengraph image after the post heading.',
+      initialValue: false,
+      group: "media"
+    }),
 
     defineField({
       name: 'tags',
@@ -112,7 +120,7 @@ export const post = defineType({
       publishedAt: 'publishedAt',
     },
     prepare({ title, media, publishedAt }) {
-      const formattedPublishedAt = format(parseISO(publishedAt), 'PPPP');
+      const formattedPublishedAt = format(parseISO(publishedAt), 'PPP');
       return {
         title,
         media,

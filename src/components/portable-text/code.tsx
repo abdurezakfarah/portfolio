@@ -7,6 +7,16 @@ import { MdOutlineContentCopy, MdOutlineDoneAll } from 'react-icons/md';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
+
+const customOneDark = {
+  ...oneDark,
+  'groq-operator': { color: '#FF79C6' }, // example: operators like "==", "<=", etc.
+  'groq-keyword': { color: '#8BE9FD' }, // example: keywords like "select", "filter", "order"
+  'groq-function': { color: '#50FA7B' }, // example: functions like "count()", "sum()"
+  'groq-string': { color: '#F1FA8C' }, // strings
+};
+
+
 type CodeProps = {
   value: CustomCode;
 };
@@ -71,7 +81,7 @@ export default function Code({ value }: CodeProps) {
 
       <SyntaxHighlighter
         language={code.language}
-        style={oneDark}
+        style={customOneDark}
         customStyle={{
           margin: 0,
           background: '#100d25',

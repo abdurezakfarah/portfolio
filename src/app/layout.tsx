@@ -6,8 +6,6 @@ import '@/styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
-import { headers } from 'next/headers';
-import Script from 'next/script';
 import NextTopLoader from 'nextjs-toploader';
 import { fontHeading } from './fonts/cal-sans';
 import { firaCode } from './fonts/fira-code';
@@ -146,7 +144,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = headers().get('x-nonce');
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth focus:scroll-auto">
       <body
@@ -157,14 +154,6 @@ export default function RootLayout({
           firaCode.variable,
         )}
       >
-        <Script
-          strategy="afterInteractive"
-          id="nonce-script"
-          nonce={nonce || undefined}
-          dangerouslySetInnerHTML={{
-            __html: `__webpack_nonce__ = ${JSON.stringify(nonce)}`,
-          }}
-        />
         <NextTopLoader
           color="#915eff"
           initialPosition={0.08}

@@ -61,9 +61,7 @@ function PostListItem({ post }: PostListItemProps) {
         />
       )}
       <section>
-        <h3 className="line-clamp-2 font-medium sm:line-clamp-3">
-          {post.title + post.title + post.title}
-        </h3>
+        <h3 className="line-clamp-2 font-medium sm:line-clamp-3">{post.title}</h3>
         <p className="mt-1.5 text-sm text-muted-foreground md:mt-2">
           <time dateTime={format(post.publishedAt, 'yyyy-mm-dd')}>
             {format(post.publishedAt, 'PPP')}

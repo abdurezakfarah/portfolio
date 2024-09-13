@@ -65,7 +65,7 @@ const portableTextDefaultComponents: PortableTextComponents = {
           href={value.href}
           rel={external}
           target={!!external ? '_blank' : undefined}
-          className="font-medium text-[#f5f1ff] underline underline-offset-4"
+          className="font-medium text-[#f9f6ff] underline decoration-[#c6abfe] underline-offset-4"
         >
           {children}
         </Link>

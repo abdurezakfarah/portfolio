@@ -2197,6 +2197,13 @@
         },
         "optional": true
       },
+      "showOg": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "tags": {
         "type": "objectAttribute",
         "value": {

@@ -360,6 +360,7 @@ export type Post = {
     crop?: SanityImageCrop;
     _type: 'image';
   };
+  showOg?: boolean;
   tags: Array<{
     _ref: string;
     _type: 'reference';
@@ -857,12 +858,13 @@ export type PageQueryResult = {
   >;
 } | null;
 // Variable: postPageQuery
-// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    "slug": slug.current,    "ogImage": ogImage.asset->url,    publishedAt,    excerpt,    body,    category-> {      name,      "slug": slug.current    },    tags[]->{      "slug": slug.current,      name    },    author->{      name,      twitter,      "image": image.asset->url,      "slug": slug.current    },    "plainText": pt::text(body),    "keywords": string::split(keywords, ","),    _updatedAt,       "toc": body[length(style) == 2 && string::startsWith(style, "h") && style in ["h2"]],        "relatedPosts": *[      _type == "post"      && _id != ^._id       && count(tags[@._ref in ^.^.tags[]._ref]) > 0    ][0..5]{      title,      "slug": slug.current,      "ogImage": ogImage.asset->url,      publishedAt,      "plainText": pt::text(body)    },    "recentPosts": *[      _type == "post"       && _id != ^._id      && !(_id in *[          _type == "post"          && _id != ^.^._id           && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0        ]._id)      ] | order(publishedAt desc)[0..5]{      title,      "slug": slug.current,      "ogImage": ogImage.asset->url,      publishedAt,      "plainText": pt::text(body)    }  }
+// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    "slug": slug.current,    "ogImage": ogImage.asset->url,    showOg,    publishedAt,    excerpt,    body,    category-> {      name,      "slug": slug.current    },    tags[]->{      "slug": slug.current,      name    },    author->{      name,      twitter,      "image": image.asset->url,      "slug": slug.current    },    "plainText": pt::text(body),    "keywords": string::split(keywords, ","),    _updatedAt,       "headings": body[style in ["h1", "h2", "h3", "h4", "h5", "h6"]],        "relatedPosts": *[      _type == "post"      && _id != ^._id       && count(tags[@._ref in ^.^.tags[]._ref]) > 0    ][0..5]{      title,      "slug": slug.current,      "ogImage": ogImage.asset->url,      publishedAt,      "plainText": pt::text(body)    },    "recentPosts": *[      _type == "post"       && _id != ^._id      && !(_id in *[          _type == "post"          && _id != ^.^._id           && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0        ]._id)      ] | order(publishedAt desc)[0..5]{      title,      "slug": slug.current,      "ogImage": ogImage.asset->url,      publishedAt,      "plainText": pt::text(body)    }  }
 export type PostPageQueryResult = {
   _id: string;
   title: string;
   slug: string;
   ogImage: string | null;
+  showOg: boolean | null;
   publishedAt: string;
   excerpt: string;
   body: Richtext;
@@ -880,7 +882,7 @@ export type PostPageQueryResult = {
   plainText: string;
   keywords: Array<string> | null;
   _updatedAt: string;
-  toc: Array<{
+  headings: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -938,7 +940,7 @@ import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n *[_type == "page" && slug.current == $slug][0]{\n   ...,\n   content[] {\n      ...,\n     _type == "experience" => {\n      ...,\n      experience[]->\n     },\n     _type == "skills" => {\n      ...,\n      skills[] {\n        ...,\n        technologies[]{\n          ...,\n          "icon": icon.asset->url\n        }\n      }\n     },\n     _type == "projectBlock" => {\n        ...,\n        projects[]->{\n          ...,\n          image {\n            ...,\n            asset->\n          }\n        }\n     },\n     _type == "testimonials" => {\n        ...,\n        testimonials[]-> {\n          ...,\n          image {\n            ...,\n            asset->\n          }\n        }\n     }\n   }\n }\n': PageQueryResult;
-    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    "slug": slug.current,\n    "ogImage": ogImage.asset->url,\n    publishedAt,\n    excerpt,\n    body,\n    category-> {\n      name,\n      "slug": slug.current\n    },\n    tags[]->{\n      "slug": slug.current,\n      name\n    },\n    author->{\n      name,\n      twitter,\n      "image": image.asset->url,\n      "slug": slug.current\n    },\n    "plainText": pt::text(body),\n    "keywords": string::split(keywords, ","),\n    _updatedAt,\n    \n   "toc": body[length(style) == 2 && string::startsWith(style, "h") && style in ["h2"]],\n    \n    "relatedPosts": *[\n      _type == "post"\n      && _id != ^._id \n      && count(tags[@._ref in ^.^.tags[]._ref]) > 0\n    ][0..5]{\n      title,\n      "slug": slug.current,\n      "ogImage": ogImage.asset->url,\n      publishedAt,\n      "plainText": pt::text(body)\n    },\n    "recentPosts": *[\n      _type == "post" \n      && _id != ^._id\n      && !(_id in *[\n          _type == "post"\n          && _id != ^.^._id \n          && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0\n        ]._id)\n      ] | order(publishedAt desc)[0..5]{\n      title,\n      "slug": slug.current,\n      "ogImage": ogImage.asset->url,\n      publishedAt,\n      "plainText": pt::text(body)\n    }\n  }\n  ': PostPageQueryResult;
+    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    "slug": slug.current,\n    "ogImage": ogImage.asset->url,\n    showOg,\n    publishedAt,\n    excerpt,\n    body,\n    category-> {\n      name,\n      "slug": slug.current\n    },\n    tags[]->{\n      "slug": slug.current,\n      name\n    },\n    author->{\n      name,\n      twitter,\n      "image": image.asset->url,\n      "slug": slug.current\n    },\n    "plainText": pt::text(body),\n    "keywords": string::split(keywords, ","),\n    _updatedAt,\n    \n   "headings": body[style in ["h1", "h2", "h3", "h4", "h5", "h6"]],\n    \n    "relatedPosts": *[\n      _type == "post"\n      && _id != ^._id \n      && count(tags[@._ref in ^.^.tags[]._ref]) > 0\n    ][0..5]{\n      title,\n      "slug": slug.current,\n      "ogImage": ogImage.asset->url,\n      publishedAt,\n      "plainText": pt::text(body)\n    },\n    "recentPosts": *[\n      _type == "post" \n      && _id != ^._id\n      && !(_id in *[\n          _type == "post"\n          && _id != ^.^._id \n          && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0\n        ]._id)\n      ] | order(publishedAt desc)[0..5]{\n      title,\n      "slug": slug.current,\n      "ogImage": ogImage.asset->url,\n      publishedAt,\n      "plainText": pt::text(body)\n    }\n  }\n  ': PostPageQueryResult;
     '\n  *[_type == "post"][0..20] | order(publishedAt desc){\n    _id,\n    "slug": slug.current,\n    title,\n    "image": ogImage.asset->url,\n    excerpt,\n    "plainText": pt::text(body),\n    publishedAt\n  }\n': BlogPageQueryResult;
     '\n  *[_type == "post"]{\n    title, \n    "slug": slug.current, \n    excerpt,\n    _updatedAt\n  }\n': PostsQueryResult;
   }

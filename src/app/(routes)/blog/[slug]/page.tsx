@@ -1,7 +1,7 @@
 import { PostsList } from '@/components/blog/blog-list';
 import { JsonLd } from '@/components/json-ld';
 import { PortableText } from '@/components/portable-text';
-import { Toc, nestToc } from '@/components/sanity-toc';
+import { Toc } from '@/components/sanity-toc';
 import { buttonVariants } from '@/components/shadcn/button';
 import { siteConfig } from '@/configuration/site';
 import { cn } from '@/lib/utilities/cn';
@@ -28,7 +28,11 @@ export const dynamic = 'force-static';
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const { slug } = params;
-  const post = await client.fetch<PostPageQueryResult>(postPageQuery, { slug });
+  const post = await client.fetch<PostPageQueryResult>(
+    postPageQuery,
+    { slug },
+    { cache: 'no-store' },
+  );
 
   if (!post) {
     notFound();
@@ -69,7 +73,11 @@ export async function generateStaticParams() {
 }
 
 export default async function PostPage({ params: { slug } }: PostPageProps) {
-  const post = await client.fetch<PostPageQueryResult>(postPageQuery, { slug });
+  const post = await client.fetch<PostPageQueryResult>(
+    postPageQuery,
+    { slug },
+    { cache: 'no-store' },
+  );
 
   if (!post) return;
 
@@ -125,9 +133,13 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
         <article id="post-body" className="mx-auto max-w-2xl">
           <div>
             <div className="flex gap-2 text-muted-foreground">
-              <time dateTime={format(post.publishedAt, 'yyyy-mm-dd')}>
-                Published on {format(post.publishedAt, 'PPP')}
-              </time>
+              <div>
+                <span> Published on </span>
+                <time dateTime={format(post.publishedAt, 'yyyy-mm-dd')}>
+                  {format(post.publishedAt, 'PPP')}
+                </time>
+              </div>
+
               <span aria-hidden>&#x2022;</span>
               <span>{readingTime(post.plainText).text}</span>
             </div>
@@ -156,7 +168,7 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
               </div>
             </Link>
           </div>
-          {post.ogImage && (
+          {post.showOg && post.ogImage && (
             <Image
               src={post.ogImage}
               alt={post.title}
@@ -166,6 +178,9 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
               priority
             />
           )}
+          <aside className="lg:hidden">
+            <Toc headings={post.headings} />
+          </aside>
           <PortableText value={post.body} />
           <hr className="mt-12" />
           <div className="flex justify-center py-6 lg:py-10">
@@ -175,11 +190,11 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
             </Link>
           </div>
         </article>
-        <aside className="sticky top-16 mr-auto hidden h-fit max-h-[calc(100vh-3rem)] w-72 overflow-y-auto overscroll-y-contain rounded-xl bg-black-100 px-8 pb-10 lg:block">
-          <Toc elements={nestToc(post.toc)} title="Content" />
+        <aside className="sticky top-16 mr-auto hidden h-fit max-h-[calc(100vh-3rem)] w-72 overflow-y-auto overscroll-y-contain rounded-xl bg-black-100 px-8 py-10 lg:block">
+          <Toc headings={post.headings} title="Content" />
         </aside>
       </div>
-      {!(post.recentPosts || post.relatedPosts) && (
+      {(post.recentPosts || post.relatedPosts) && (
         <aside className="container space-y-10 p-0 sm:space-y-12 md:space-y-16">
           {post.relatedPosts && (
             <PostsList posts={post.relatedPosts} title="Similar posts" />
