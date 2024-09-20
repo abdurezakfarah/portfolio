@@ -138,11 +138,7 @@ type TocProps = {
 
 export function AccorionToc({ headings, title = 'Content' }: TocProps) {
   return (
-    <Accordion
-      type="single"
-      collapsible
-      className="w-full py-2 rounded-lg bg-black-100"
-    >
+    <Accordion type="single" collapsible className="w-full rounded-lg bg-black-100 py-2">
       <AccordionItem value="content" className="border-none">
         <AccordionTrigger className="px-4 hover:no-underline">{title}</AccordionTrigger>
         <AccordionContent className="rounded-b-lg px-4 pb-8 pt-4" asChild>
@@ -158,7 +154,7 @@ export function AccorionToc({ headings, title = 'Content' }: TocProps) {
 export function Toc({ headings, title = 'Content' }: TocProps) {
   return (
     <section className="space-y-4">
-      <h2 className='font-heading leadig-[1.2] tracking-wide '>{title}</h2>
+      <h2 className="leadig-[1.2] font-heading tracking-wide">{title}</h2>
       <nav className="flex gap-4">
         <RenderToc elements={nestHeadings(headings)} />
       </nav>
