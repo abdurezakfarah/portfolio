@@ -1,17 +1,13 @@
-'use client';
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/shadcn/accordion';
-import { useLg } from '@/hooks/use-lg';
 import { cn } from '@/lib/utilities/cn';
 import { slugify } from '@/lib/utilities/slugify';
 import { PostPageQueryResult } from '@/sanity/sanity.types';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 // Define the type for the Table of Contents (ToC)
 type Headings = NonNullable<PostPageQueryResult>['headings'];
@@ -135,41 +131,37 @@ export function RenderToc({
   );
 }
 
-export function Toc({ headings, title }: { headings: Headings; title?: string }) {
-  const isLg = useLg();
-  const [accordionValue, setAccordionValue] = useState<string | undefined>(undefined);
+type TocProps = {
+  headings: Headings;
+  title?: string;
+};
 
-  useEffect(() => {
-    if (isLg) {
-      setAccordionValue('toc-content');
-    } else {
-      setAccordionValue(undefined);
-    }
-  }, [isLg]);
-
-  const handleAccordionChange = (value: string | undefined) => {
-    setAccordionValue((prev) => (prev === value ? undefined : value));
-  };
+export function AccorionToc({ headings, title = 'Content' }: TocProps) {
   return (
-    <section className="flex max-w-sm flex-col max-lg:my-10">
-      <Accordion
-        type="single"
-        collapsible
-        className="w-full bg-black-100"
-        value={accordionValue}
-        onValueChange={handleAccordionChange}
-      >
-        <AccordionItem value="toc-content" className="border-none">
-          <AccordionTrigger className="rounded-lg border px-4 hover:no-underline">
-            {title ?? 'Content'}
-          </AccordionTrigger>
-          <AccordionContent className="rounded-b-lg px-4 pb-8 pt-4">
-            <nav className="flex gap-4">
-              <RenderToc elements={nestHeadings(headings)} />
-            </nav>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full py-2 rounded-lg bg-black-100"
+    >
+      <AccordionItem value="content" className="border-none">
+        <AccordionTrigger className="px-4 hover:no-underline">{title}</AccordionTrigger>
+        <AccordionContent className="rounded-b-lg px-4 pb-8 pt-4" asChild>
+          <nav>
+            <RenderToc elements={nestHeadings(headings)} />
+          </nav>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+export function Toc({ headings, title = 'Content' }: TocProps) {
+  return (
+    <section className="space-y-4">
+      <h2 className='font-heading leadig-[1.2] tracking-wide '>{title}</h2>
+      <nav className="flex gap-4">
+        <RenderToc elements={nestHeadings(headings)} />
+      </nav>
     </section>
   );
 }

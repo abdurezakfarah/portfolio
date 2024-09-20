@@ -1,10 +1,9 @@
 import { PostsList } from '@/components/blog/blog-list';
 import { JsonLd } from '@/components/json-ld';
 import { PortableText } from '@/components/portable-text';
-import { Toc } from '@/components/sanity-toc';
-import { buttonVariants } from '@/components/shadcn/button';
+import { AccorionToc, Toc } from '@/components/sanity-toc';
+import { Button } from '@/components/shadcn/button';
 import { siteConfig } from '@/configuration/site';
-import { cn } from '@/lib/utilities/cn';
 import { client } from '@/sanity/lib/client';
 import { postPageQuery, postsQuery } from '@/sanity/lib/queries';
 import type { PostPageQueryResult, PostsQueryResult } from '@/sanity/sanity.types';
@@ -128,7 +127,7 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
   return (
     <main className="container relative w-full px-8 pb-6 md:pb-10">
       <JsonLd jsonLd={postJsonLd} />
-      <div className="gap-4 pt-6 lg:flex lg:pt-10">
+      <div className="gap-10 pt-6 lg:flex lg:pt-10">
         <article id="post-body" className="mx-auto max-w-2xl">
           <div>
             <div className="text-muted-foreground">
@@ -156,9 +155,7 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
               )}
               <div className="flex-1 text-left leading-tight">
                 <p className="font-medium">{post.author.name}</p>
-                <p className="text-[12px] text-muted-foreground">
-                  @{post.author.twitter}
-                </p>
+                <p className="text-xs text-muted-foreground">@{post.author.twitter}</p>
               </div>
             </Link>
           </div>
@@ -172,20 +169,22 @@ export default async function PostPage({ params: { slug } }: PostPageProps) {
               priority
             />
           )}
-          <aside className="lg:hidden">
-            <Toc headings={post.headings} />
+          <aside className="my-10 lg:hidden">
+            <AccorionToc headings={post.headings} />
           </aside>
           <PortableText value={post.body} />
           <hr className="mt-12" />
           <div className="flex justify-center py-6 lg:py-10">
-            <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
-              <MdChevronLeft className="mr-2 size-4" />
-              See all posts
-            </Link>
+            <Button variant="ghost" asChild>
+              <Link href="/blog">
+                <MdChevronLeft className="mr-2 size-4" />
+                See all posts
+              </Link>
+            </Button>
           </div>
         </article>
-        <aside className="sticky top-16 mr-auto hidden h-fit max-h-[calc(100vh-3rem)] w-72 overflow-y-auto overscroll-y-contain rounded-xl bg-black-100 px-8 py-10 lg:block">
-          <Toc headings={post.headings} title="Content" />
+        <aside className="sticky top-16 mr-auto h-fit max-h-[calc(100vh-3rem)] w-72 overflow-y-auto overscroll-y-contain rounded-xl bg-black-100 px-8 py-10 max-lg:hidden">
+          <Toc headings={post.headings} title="Post content" />
         </aside>
       </div>
       {(post.recentPosts || post.relatedPosts) && (
