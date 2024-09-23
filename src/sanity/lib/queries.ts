@@ -122,3 +122,16 @@ export const postsQuery = groq`
     _updatedAt
   }
 `;
+export const sitemapQuery = groq`
+  {
+  "home":  *[_type == "page" && slug.current == "home"][0]{
+    "lastModified": _updatedAt
+  },
+  "posts": *[_type == "post"]{
+    title, 
+    "slug": slug.current, 
+    "description": excerpt,
+    "lastModified": _updatedAt
+  }
+  }
+`;

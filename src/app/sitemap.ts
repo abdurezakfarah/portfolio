@@ -1,15 +1,15 @@
 import { siteConfig } from '@/configuration/site';
 import { client } from '@/sanity/lib/client';
-import { postsQuery } from '@/sanity/lib/queries';
-import { PostsQueryResult } from '@/sanity/sanity.types';
+import { sitemapQuery } from '@/sanity/lib/queries';
+import { SitemapQueryResult } from '@/sanity/sanity.types';
 import type { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await client.fetch<PostsQueryResult>(postsQuery);
+  const { home, posts } = await client.fetch<SitemapQueryResult>(sitemapQuery);
 
   const postsSitemap: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${siteConfig.url}/blog/${post.slug}`,
-    lastModified: post._updatedAt,
+    lastModified: post.lastModified,
     changeFrequency: 'daily',
     priority: 1,
   }));
@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: siteConfig.url,
-      lastModified: new Date(),
+      lastModified: home?.lastModified,
       changeFrequency: 'daily',
       priority: 1,
     },
