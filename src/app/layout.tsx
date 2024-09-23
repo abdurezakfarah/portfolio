@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     creator: '@abdirizakafarah',
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   icons: [
     {
       rel: 'shortcut icon',
