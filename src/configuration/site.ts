@@ -3,9 +3,9 @@ import { publicUrl } from '../../env.mjs';
 
 export const siteConfig: SiteConfig = {
   name: 'Abdurezak',
-  shortName: 'Abdi',
+  shortName: 'Abdurezak',
   description:
-    "I am a fullstack developer who enjoys developing websites that make users' live easier through well-structured code.",
+    'I’m a passionate full-stack developer specializing in creating user-friendly websites with clean, efficient, and well-structured code to improve user experiences and simplify everyday tasks.',
   url: publicUrl,
   github: 'https://www.github.com/abdurezakfarah',
   twitter: 'https//www.x.com/abdurezakfarah',
