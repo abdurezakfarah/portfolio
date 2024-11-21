@@ -21,10 +21,17 @@ export function Hero({ hero }: HeroProps) {
         <hgroup>
           <span className="text-3xl font-black md:text-5xl lg:text-6xl">{eyebrow}</span>
           <h2 className="mt-3 flex flex-col text-5xl font-black leading-[1.1] md:text-6xl lg:text-7xl">
-            <span className="text-primary">{firstName}</span>
-            <span className="text-primary">{lastName}</span>
+            <span id="first-name" className="text-primary">
+              {firstName}
+            </span>
+            <span id="last-name" className="text-primary">
+              {lastName}
+            </span>
           </h2>
-          <p className="mt-4 text-pretty text-lg font-medium text-[#dfd9ff] sm:text-xl lg:text-2xl">
+          <p
+            id="about"
+            className="mt-4 text-pretty text-lg font-medium text-[#dfd9ff] sm:text-xl lg:text-2xl"
+          >
             {subtitle}
           </p>
         </hgroup>
