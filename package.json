@@ -89,7 +89,7 @@
   },
   "husky": {
     "pre-commit": "lint-staged",
-    "pre-push": "npm run format:fix && npm run lint:fix && npm run lint"
+    "pre-push": "lint-staged"
   },
   "config": {
     "commitizen": {
